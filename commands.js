@@ -23,20 +23,23 @@ const fs = require("fs");
       break;
 
       case "head":
-      commandLibrary.cat(userInputArray.slice(1));
+      commandLibrary.head(userInputArray.slice(1));
       break;
 
       case "tail":
-      commandLibrary.cat(userInputArray.slice(1));
+      commandLibrary.tail(userInputArray.slice(1));
       break;
+
+      default:
+      commandLibrary.errorHandler()
   }
  }
-
 
  const commandLibrary = {
     "echo": function(userInput) {
         done(userInput);
     },
+
     "cat": function(fullPath) {
         const fileName = fullPath[0];
         fs.readFile(fileName, (err, data) => {
@@ -45,33 +48,32 @@ const fs = require("fs");
         });
     },
 
-    "head": function(fullPath, n) {
+    "head": function(fullPath) {
         const fileName = fullPath[0];
         fs.readFile(fileName, (err, data) => {
             if (err) throw err;
-            done(data);
-            var output = '';
-            splitted = data.split('\n');
-            for (let i=0; i < n;i++){
-                output += splitted[i];
-            }
-            return output;
+            var text = data.toString()
+            var splitted = text.split('\n');
+            var output = splitted.splice(0, 10).join('\n')
+            done(output);
         });
     },
 
-    "tail": function(fullPath, n) {
+    "tail": function(fullPath) {
         const fileName = fullPath[0];
         fs.readFile(fileName, (err, data) => {
             if (err) throw err;
-            done(data);
-            var output = '';
-            splitted = data.split('\n');
-            for (let i=splitted.length; i > n;i--){
-                output -= splitted[i];
-            }
-            return output;
+            var text = data.toString()
+            var splitted = text.split('\n');
+            var output = splitted.splice(splitted.length - 10).join('\n')
+            done(output);
         });
-    }
+    },
+
+    "errorHandler": function() {
+        done ("Error: Not a command")
+    },
+
  };
 
  module.exports.commandLibrary = commandLibrary;

@@ -1,0 +1,40 @@
+1. Run the commands sort, wc and uniq on the commands.js file. Explain how they work and 
+what the output was.
+
+A:
+
+sort- it will sort out the file you chose by number (0-9) and then letters (a-z). It will determines the first letter or number in the line inside the file then it will sort it out accordingly.
+
+wc - this commands shows how many line, words and bytes you have in the selected file. If you run this command it will show up "2  3  10  hello.txt". This means that you have 2 lines inside the file that has 3 words in it, the 10 means that the file has 10 bytes of memory or data, and the hello.txt in the end is the file name that you selected.
+
+uniq - this commands filters out repeated lines with same number, text or character in a consecutive manner. Lets say you have three lines in the file, 1st line has "hello", 2nd line has "hello" and thirst line has "hi". If you run the uniq command in the file, it will only show up "hello" and "hi" since the "hello" is repeated consecutively.
+
+2. Using the pipe (|) connect at least two commands and run it on commands.js. Explain what the output was and why the specific data was outputted.
+
+A:
+
+The pipe (|) line is acting like a separator between commands and the system will do the first command written then will move on to the next command. Such as typing "touch hello.txt | open hello.txt" on the terminal, the system will first create hello.txt file on the folder you are currently into and when it is finished with that command, it will move to the next command which will open the hello.txt file.
+
+6.
+
+Reverse String
+
+Given a string, reverse the order of characters in each word within a sentence while maintaining the original word order and whitespace and return the string. To improve your problem-solving experience, use the suggested functions to solve the problem.
+
+Example
+Input: "I'm learning to program algorithms!"
+Output: "m'I gninrael ot margorp !smhtirogla"
+
+A:
+
+```
+
+function reverseString(inputString) {
+   return inputString.split(' ').map((text)=>{
+     return text.split('').reverse().join('');
+   }).join(' ')
+}
+
+console.log(reverseString("I'm learning to program algorithms!"))
+
+```
